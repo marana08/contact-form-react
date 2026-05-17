@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './ContactForm.module.css';
-import polygonImg from '../public/Polygon-1-copy-2 2.png';
+import polygonImg from '../public/backgoung-icon.png';
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
