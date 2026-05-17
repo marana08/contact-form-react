@@ -33,7 +33,7 @@ app.post("/api/contact", async (req, res) => {
         console.log("FROM (SMTP_USER):", process.env.SMTP_USER);
 
         const info = await transporter.sendMail({
-            from: `"Contact Form" <a77c34001@smtp-brevo.com>`,
+             from: process.env.SMTP_FROM,
              to: email,
             bcc: process.env.SMTP_FROM,
             replyTo: email,
