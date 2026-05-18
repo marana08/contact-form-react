@@ -23,8 +23,6 @@ app.post(
     "/api/contact",
     upload.single("file"),
     async (req, res) => {
-        console.log("BODY:", req.body);
-        console.log("FILE:", req.file);
 
         const { name, email, message } = req.body;
 
@@ -65,15 +63,12 @@ ${message}
 
             const info = await transporter.sendMail(mailOptions);
 
-            console.log("EMAIL SENT:", info.messageId);
-
             return res.json({
                 success: true,
                 message: "Email sent successfully!",
             });
 
         } catch (error) {
-            console.error("EMAIL ERROR:", error);
 
             return res.json({
                 success: false,

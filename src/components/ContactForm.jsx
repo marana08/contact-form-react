@@ -73,7 +73,6 @@ export default function ContactForm() {
                 setMessageType('error');
             }
         } catch (error) {
-            console.error(error);
 
             setMessage('Error: Unable to connect to server');
             setMessageType('error');
