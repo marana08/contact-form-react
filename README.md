@@ -1,6 +1,6 @@
 # Contact Form React
 
-Простий fullstack-проєкт з React формою зворотного зв'язку та Node.js сервером.
+Простий fullstack-проєкт з React формою зворотного зв'язку та Node.js (Express) сервером.
 
 ---
 
@@ -11,21 +11,15 @@
 - JavaScript
 - Node.js
 - Express
+- dotenv
 - CSS
 
 ---
 
 ## 📦 Клонування проєкту
 
-Склонуй репозиторій:
-
 ```bash
 git clone https://github.com/marana08/contact-form-react.git
-```
-
-Перейди в папку проєкту:
-
-```bash
 cd contact-form-react
 ```
 
@@ -33,66 +27,101 @@ cd contact-form-react
 
 ## 📥 Встановлення залежностей
 
-Встанови всі необхідні пакети:
-
 ```bash
 npm install
 ```
 
 ---
 
-## ▶️ Запуск backend сервера
+## ⚙️ Налаштування змінних середовища (.env)
 
-Запусти Node.js сервер:
+Перед запуском створіть файл `.env` у корені проєкту:
+
+```bash
+touch .env
+```
+
+І додайте туди:
+
+```env
+PORT=5000
+```
+
+### 📌 Опис змінних:
+
+- # Server
+PORT=5000
+
+# SMTP configuration (Nodemailer)
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=your_email@example.com
+SMTP_PASS=your_password
+
+# Sender email
+SMTP_FROM=your_email@example.com
+
+> Якщо фронтенд робить запити до API, переконайся, що URL у коді відповідає цьому порту.
+
+---
+
+## ▶️ Запуск backend сервера
 
 ```bash
 node server.js
 ```
 
+Сервер стартує на:
+
+```
+http://localhost:5000
+```
+
 ---
 
-## ▶️ Запуск frontend
+## ▶️ Запуск frontend (React)
 
-В іншому терміналі запусти React/Vite:
+В іншому терміналі:
 
 ```bash
 npm run dev
 ```
 
----
+Фронтенд буде доступний за адресою:
 
-## 🌐 Відкриття проєкту
-
-Після запуску відкрий у браузері:
-
-```bash
+```
 http://localhost:5173
 ```
 
 ---
 
+## 🌐 Як працює проєкт
+
+1. React форма відправляє дані на backend
+2. Node.js (Express) приймає запит
+3. Сервер обробляє дані (наприклад, лог або відправка email)
+4. Повертає відповідь на frontend
+
+---
+
 ## 🛠️ Доступні команди
 
-### Запуск frontend
-
+### Frontend
 ```bash
 npm run dev
 ```
 
-### Запуск backend
-
+### Backend
 ```bash
 node server.js
 ```
 
-### Збірка production версії
-
+### Build production
 ```bash
 npm run build
 ```
 
-### Перегляд production build
-
+### Preview build
 ```bash
 npm run preview
 ```
@@ -114,19 +143,26 @@ contact-form-react/
 ├── server.js
 ├── package.json
 ├── vite.config.js
+├── .env
 └── README.md
 ```
 
 ---
 
+## ⚠️ Важливо
+
+- Не коміть `.env` у GitHub
+- Переконайся що backend і frontend запущені одночасно
+- Якщо CORS помилка — перевір Express CORS middleware
+
+---
+
 ## ⚙️ Вимоги
 
-Перед запуском переконайся, що встановлено:
-
-- Node.js
+- Node.js >= 16
 - npm
 
-Перевірка версій:
+Перевірка:
 
 ```bash
 node -v
@@ -135,14 +171,12 @@ npm -v
 
 ---
 
-## 📸 Можливості
+## 📸 Функціонал
 
-Форма дозволяє:
-
-- вводити ім'я
-- вводити email
-- писати повідомлення
-- надсилати форму на сервер
+- Ввід імені
+- Email
+- Повідомлення
+- Відправка форми на сервер
 
 ---
 
