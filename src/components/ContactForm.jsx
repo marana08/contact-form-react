@@ -7,6 +7,7 @@ export default function ContactForm() {
         name: '',
         email: '',
         message: '',
+        file: null,
     });
 
     const [loading, setLoading] = useState(false);
@@ -22,6 +23,15 @@ export default function ContactForm() {
         }));
     };
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+
+        setFormData((prev) => ({
+            ...prev,
+            file,
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -29,12 +39,19 @@ export default function ContactForm() {
         setMessage('');
 
         try {
+            const submitData = new FormData();
+
+            submitData.append('name', formData.name);
+            submitData.append('email', formData.email);
+            submitData.append('message', formData.message);
+
+            if (formData.file) {
+                submitData.append('file', formData.file);
+            }
+
             const response = await fetch('http://localhost:5000/api/contact', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
+                body: submitData,
             });
 
             const data = await response.json();
@@ -47,6 +64,7 @@ export default function ContactForm() {
                     name: '',
                     email: '',
                     message: '',
+                    file: null,
                 });
 
                 setTimeout(() => setMessage(''), 5000);
@@ -127,6 +145,14 @@ export default function ContactForm() {
                     />
                 </div>
 
+                <input
+                    type="file"
+                    id="fileUpload"
+                    accept="image/*,.pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    hidden
+                />
+
                 <div className={styles.bottomRow}>
                     <button
                         type="submit"
@@ -137,14 +163,30 @@ export default function ContactForm() {
                     </button>
 
                     <div className={styles.actions}>
-                        <button className={styles.iconBtn}>
-                            <svg className={`${styles.icon} ${styles.iconteenyicons}`}>
+                        {formData.file && (
+                            <p className={styles.fileName}>
+                                {formData.file.name}
+                            </p>
+                        )}
+
+                        <label
+                            htmlFor="fileUpload"
+                            className={styles.iconBtn}
+                        >
+                            <svg
+                                className={`${styles.icon} ${styles.iconteenyicons}`}
+                            >
                                 <use href="/src/public/sprite.svg#icon-teenyicons" />
                             </svg>
-                        </button>
+                        </label>
 
-                        <button className={styles.iconBtn}>
-                            <svg className={`${styles.icon} ${styles.iconarrowright}`}>
+                        <button
+                            type="submit"
+                            className={styles.iconBtn}
+                        >
+                            <svg
+                                className={`${styles.icon} ${styles.iconarrowright}`}
+                            >
                                 <use href="/src/public/sprite.svg#icon-arrow-right" />
                             </svg>
                         </button>
@@ -163,8 +205,8 @@ export default function ContactForm() {
                         className={styles.socialButton}
                         style={{ backgroundImage: `url(${polygonImg})` }}
                     >
-                        <svg aria-hidden="true" >
-                            <use href='/src/public/sprite.svg#icon-instagram' />
+                        <svg aria-hidden="true">
+                            <use href="/src/public/sprite.svg#icon-instagram" />
                         </svg>
                     </a>
 
@@ -176,7 +218,7 @@ export default function ContactForm() {
                         style={{ backgroundImage: `url(${polygonImg})` }}
                     >
                         <svg aria-hidden="true">
-                            <use href='/src/public/sprite.svg#icon-instagram' />
+                            <use href="/src/public/sprite.svg#icon-instagram" />
                         </svg>
                     </a>
 
@@ -187,8 +229,8 @@ export default function ContactForm() {
                         className={styles.socialButton}
                         style={{ backgroundImage: `url(${polygonImg})` }}
                     >
-                        <svg aria-hidden="true" >
-                            <use href='/src/public/sprite.svg#icon-instagram' />
+                        <svg aria-hidden="true">
+                            <use href="/src/public/sprite.svg#icon-instagram" />
                         </svg>
                     </a>
                 </div>
