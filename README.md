@@ -45,12 +45,6 @@ touch .env
 
 ```env
 PORT=5000
-```
-
-### 📌 Опис змінних:
-
-- # Server
-PORT=5000
 
 # SMTP configuration (Nodemailer)
 SMTP_HOST=smtp.example.com
@@ -60,8 +54,22 @@ SMTP_PASS=your_password
 
 # Sender email
 SMTP_FROM=your_email@example.com
+```
 
-> Якщо фронтенд робить запити до API, переконайся, що URL у коді відповідає цьому порту.
+---
+
+## 📌 Опис змінних
+
+- `PORT` — порт, на якому запускається backend сервер (Express)
+- `SMTP_HOST` — SMTP сервер (наприклад Gmail, SendGrid тощо)
+- `SMTP_PORT` — порт SMTP (часто 587 або 465)
+- `SMTP_USER` — логін (email)
+- `SMTP_PASS` — пароль або app password
+- `SMTP_FROM` — адреса відправника
+
+---
+
+> ⚠️ Не публікуй `.env` у GitHub. Додай його в `.gitignore`.
 
 ---
 
@@ -98,9 +106,9 @@ http://localhost:5173
 ## 🌐 Як працює проєкт
 
 1. React форма відправляє дані на backend
-2. Node.js (Express) приймає запит
-3. Сервер обробляє дані (наприклад, лог або відправка email)
-4. Повертає відповідь на frontend
+2. Express сервер приймає запит
+3. Дані обробляються (лог / email через Nodemailer)
+4. Повертається відповідь на frontend
 
 ---
 
@@ -151,9 +159,9 @@ contact-form-react/
 
 ## ⚠️ Важливо
 
-- Не коміть `.env` у GitHub
-- Переконайся що backend і frontend запущені одночасно
-- Якщо CORS помилка — перевір Express CORS middleware
+- Не коміть `.env` у репозиторій
+- Переконайся, що backend і frontend запущені одночасно
+- Якщо є CORS помилки — перевір `cors` middleware в Express
 
 ---
 
@@ -176,7 +184,7 @@ npm -v
 - Ввід імені
 - Email
 - Повідомлення
-- Відправка форми на сервер
+- Відправка форми на сервер (з email через Nodemailer)
 
 ---
 
