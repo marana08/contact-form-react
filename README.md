@@ -1,151 +1,102 @@
-# Contact Form React
+:
 
-Простий fullstack-проєкт з React формою зворотного зв'язку та Node.js сервером.
+📩 Contact Form React + Node.js (Nodemailer)
 
----
+Fullstack застосунок контактної форми, створений на React (Vite) та Node.js (Express) з відправкою email через Nodemailer та підтримкою завантаження файлів.
 
-## 🚀 Технології
+🚀 Технології
 
-- React
-- Vite
-- JavaScript
-- Node.js
-- Express
-- CSS
+Frontend:
 
----
+React
+Vite
+JavaScript
+CSS Modules
 
-## 📦 Клонування проєкту
+Backend:
 
-Склонуй репозиторій:
-
-```bash
+Node.js
+Express
+Nodemailer
+Multer
+dotenv
+CORS
+📦 Встановлення
 git clone https://github.com/marana08/contact-form-react.git
-```
-
-Перейди в папку проєкту:
-
-```bash
 cd contact-form-react
-```
-
----
-
-## 📥 Встановлення залежностей
-
-Встанови всі необхідні пакети:
-
-```bash
 npm install
-```
+⚙️ Environment variables
 
----
+Створи файл .env у корені:
 
-## ▶️ Запуск backend сервера
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=your_email@example.com
+SMTP_PASS=your_password
+SMTP_FROM=your_email@example.com
 
-Запусти Node.js сервер:
-
-```bash
+PORT=5000
+▶️ Запуск проєкту
+Backend
 node server.js
-```
 
----
+Сервер:
+http://localhost:5000
 
-## ▶️ Запуск frontend
+Frontend
 
-В іншому терміналі запусти React/Vite:
+В іншому терміналі:
 
-```bash
 npm run dev
-```
 
----
-
-## 🌐 Відкриття проєкту
-
-Після запуску відкрий у браузері:
-
-```bash
+Frontend:
 http://localhost:5173
-```
 
----
+🔄 Як це працює
+Користувач заповнює форму
+React відправляє дані на /api/contact
+Node.js сервер обробляє запит
+Nodemailer надсилає email
+Сервер повертає результат
+📡 API
+POST /api/contact
 
-## 🛠️ Доступні команди
+Content-Type: multipart/form-data
 
-### Запуск frontend
+Fields:
 
-```bash
-npm run dev
-```
+name (string)
+email (string)
+message (string)
+file (optional)
 
-### Запуск backend
+Response:
 
-```bash
-node server.js
-```
-
-### Збірка production версії
-
-```bash
-npm run build
-```
-
-### Перегляд production build
-
-```bash
-npm run preview
-```
-
----
-
-## 📁 Структура проєкту
-
-```bash
+{
+  "success": true,
+  "message": "Email sent successfully!"
+}
+📁 Структура
 contact-form-react/
 │
 ├── public/
 ├── src/
 │   ├── components/
+│   ├── styles/
 │   ├── App.jsx
 │   ├── main.jsx
-│   └── styles/
 │
 ├── server.js
 ├── package.json
 ├── vite.config.js
-└── README.md
-```
-
----
-
-## ⚙️ Вимоги
-
-Перед запуском переконайся, що встановлено:
-
-- Node.js
-- npm
-
-Перевірка версій:
-
-```bash
-node -v
-npm -v
-```
-
----
-
-## 📸 Можливості
-
-Форма дозволяє:
-
-- вводити ім'я
-- вводити email
-- писати повідомлення
-- надсилати форму на сервер
-
----
-
-## 👨‍💻 Автор
+└── .env
+📌 Функціонал
+Контактна форма
+Валідація полів
+Відправка email
+Upload файлів
+Loading / success / error стани
+Responsive UI
+👨‍💻 Автор
 
 GitHub: https://github.com/marana08
